@@ -6,7 +6,10 @@ const redis = require('redis'); // Import Redis client
 const app = express();
 
 // Create a Redis client
-const client = redis.createClient();
+const client = redis.createClient({
+    host: 'redis-server', // Fixed: Added comma after 'host' and corrected the hostname
+    port: 6379 // Fixed: Added comma after 'host' and corrected the port
+});
 
 // Initialize visits count to 0 in Redis
 client.set('visits', 0);
@@ -29,9 +32,7 @@ app.get('/', (req, res) => {
     });
 });
 
-// Start the Express application on port 8081
-app.listen(8081, () => {
-    console.log('Listening on port 8081'); // Log a message when the server starts listening
+// Start the Express application on port 2020
+app.listen(2020, () => {
+    console.log('Listening on port 2020'); // Log a message when the server starts listening
 });
-
-
