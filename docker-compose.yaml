@@ -2,8 +2,17 @@ version: '3'
 services:
   redis-server:
     image: 'redis'
+    volumes:
+      - redis-data:/data
   node-app:
     restart: always
     build: .
     ports:
       - '4001:8081'
+    environment:
+      - REDIS_HOST=redis-server
+      - REDIS_PORT=6379
+    depends_on:
+      - redis-server
+volumes:
+  redis-data:
